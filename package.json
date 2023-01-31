@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ZProger378/nodejs-blog/issues"
   },
-  "homepage": "https://github.com/ZProger378/nodejs-blog#readme"
+  "homepage": "https://github.com/ZProger378/nodejs-blog#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
