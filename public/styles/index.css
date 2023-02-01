@@ -1,8 +1,31 @@
-.main-block {
-    width: 80% !important;
+.blocks {
+    display: grid;
+    grid-gap: 70px;
+    grid-template-columns: 4fr 1fr;
+} .main-block {
     margin-right: auto;
     margin-left: 50px;
+} .topics-block {
+    width: 100%;
 } .main-content {
     border: black solid 1px;
     border-radius: 5px;
+} .navbar {
+    margin-top: 0 !important;
+    border-bottom: black solid 1px;
+    border-radius: 3px;
+} .nav-ul {
+    margin-right: auto;
+    list-style-type: none;
+} .topics-ul {
+    margin-left: auto;
+} .nav-item {
+    display: inline-block;
+} .link {
+    margin-left: 30px;
+} .nav-link:hover {
+    border-bottom: black solid 1px;
+} .topic-link > a{
+    font-size: 20px;
+    color: black !important;
 }
