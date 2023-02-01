@@ -1,0 +1,8 @@
+.main-block {
+    width: 80% !important;
+    margin-right: auto;
+    margin-left: 50px;
+} .main-content {
+    border: black solid 1px;
+    border-radius: 5px;
+}
