@@ -18,9 +18,24 @@ jQuery(document).ready(() => {
             $(".enter-pass").hide()
             // Отправка формы на сервер
 
-            /*
-                Тут будет обработчик ответа с сервера
-            */
+            jQuery.ajax({
+                "url": "/login",
+                "method": "post",
+                "data": {
+                    'login': login,
+                    'pass': pass,
+                    'remember_me': remember_me
+                },
+                "beforeSend": () => {
+                    $(".login-btn").prop("disabled", true)
+                },
+                "success": (data) => {
+                    alert(data)
+                }, 
+                "complete": () => {
+                    $(".login-btn").prop("disabled", false)
+                }
+            })
         }
         
     })
