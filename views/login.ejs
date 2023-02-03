@@ -4,9 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <script src="js/prepare-login.js"></script>
     <title>Вход</title>
 </head>
 <body>
     <%- include("blocks/header"); %>
+    <link rel="stylesheet" href="styles/login.css">
+    <div class="login-form p-5">
+        <h1>Авторизация</h1>
+
+        <input class="form-control mt-5" placeholder="Логин" type="text" name="login" id="login">
+        <div class="enter-login invalid-feedback">Введите логин!</div>
+        <input class="form-control" placeholder="Пароль" type="password" name="password" id="pass">
+        <div class="enter-pass invalid-feedback">Введите пароль!</div>
+        <input class="mt-3" type="checkbox" name="remember_me" id="remember"> Запомнить меня
+
+        <button class="login-btn form control btn btn-primary mt-4">Войти</button>
+    </div>
 </body>
 </html>
