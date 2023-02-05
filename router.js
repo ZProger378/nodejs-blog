@@ -14,6 +14,9 @@ router.get("/", (req, res) => {
 router.get("/login", (req, res) => {
     res.render("login")
 })
+router.get("/reg", (req, res) => {
+    res.render("reg")
+})
 
 // Обработка POST запросов
 router.post("/login", (req, res) => {
@@ -21,7 +24,7 @@ router.post("/login", (req, res) => {
     let pass = req.body.pass
     let remember_me = req.body.remember_me
     sql.query("SELECT * FROM users WHERE login = ? AND password = ?", [login, pass], (err, result) => {
-        if (result) {
+        if (result[0] != undefined) {
             let chrs = 'abdehkmnpswxzABDEFGHKMNPQRSTWXZ123456789'
             let len = 16
             let token = ''
@@ -35,6 +38,11 @@ router.post("/login", (req, res) => {
         } else
             res.send("invalid credit data")
     })
+})
+router.post("/reg", (req, res) => {
+    let login = req.body.login
+    let pass = req.body.pass
+    let auto_auth = req.body.auto_auth
 })
 
 module.exports = router

@@ -32,6 +32,8 @@ jQuery(document).ready(() => {
                 "success": (data) => {
                     if (data == "success")
                         window.location = "/"
+                    else
+                        $(".invalid-data").show()
                 }, 
                 "complete": () => {
                     $(".login-btn").prop("disabled", false)

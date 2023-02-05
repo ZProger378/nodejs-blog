@@ -5,23 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-    <script src="js/prepare-login.js"></script>
+    <script src="js/prepare-reg.js"></script>
     <title>Вход</title>
 </head>
 <body>
     <%- include("blocks/header"); %>
     <link rel="stylesheet" href="styles/login.css">
     <div class="login-form p-5" id="form">
-        <h1 class="mb-4">Авторизация</h1>
-        <div class="invalid-data invalid-feedback text-center mb-3">Неверный логин или пароль</div>
-        <input class="form-control" placeholder="Логин" type="text" name="login" id="login">
+        <h1>Регистрация</h1>
+        <input class="form-control mt-5" placeholder="Логин" type="text" name="login" id="login">
         <div class="enter-login invalid-feedback">Введите логин!</div>
         <input class="form-control" placeholder="Пароль" type="password" name="password" id="pass">
         <div class="enter-pass invalid-feedback">Введите пароль!</div>
-        <input class="mt-3" type="checkbox" name="auto_auth" id="auto_auth"> Запомнить меня
+        <input class="form-control" placeholder="Повторите пароль" type="password" name="password-reply" id="pass-reply">
+        <div class="reply-pass invalid-feedback">Повторите пароль!</div>
+        <div class="invalid-pass invalid-feedback">Пароли не совпадают!</div>
+        <input class="mt-3" type="checkbox" name="remember_me" id="remember"> Войти автоматически
 
-        <button class="login-btn form control btn btn-primary mt-4 mb-3">Войти</button>
-        <label for="form">Нет аккаунта? <a href="/reg">Зарегистрироваться</a></label>
+        <button class="reg-btn form control btn btn-primary mt-4 mb-3">Зарегистрироваться</button>
     </div>
 </body>
 </html>
