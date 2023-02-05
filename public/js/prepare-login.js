@@ -30,7 +30,8 @@ jQuery(document).ready(() => {
                     $(".login-btn").prop("disabled", true)
                 },
                 "success": (data) => {
-                    alert(data)
+                    if (data == "success")
+                        window.location = "/"
                 }, 
                 "complete": () => {
                     $(".login-btn").prop("disabled", false)
