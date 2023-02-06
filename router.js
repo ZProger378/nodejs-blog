@@ -16,7 +16,14 @@ let create_hash = (name) => {
 
 // Обработка GET запросов
 router.get("/", (req, res) => {
-    res.render("index")
+    let token = req.cookies.token
+    if (token) {
+        sql.query("SELECT * FROM sessions WHERE token = ?", [token], (err, result) => {
+            res.render("index", {is_auth: true, username: result[0].user_id})
+        })
+    } else {
+        res.render("index", {is_auth: false, username: undefined})
+    }
 })
 router.get("/login", (req, res) => {
     res.render("login")
