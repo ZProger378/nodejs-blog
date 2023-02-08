@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создать статью</title>
+</head>
+<body>
+    <%- include("blocks/header") %>
+    <link rel="stylesheet" href="styles/create_article.css">
+    <script src="js/create_article.js"></script>
+    <div class="blocks">
+        <div class="block main-block mt-5">
+            <input class="form-control" id="article_title" type="text" placeholder="Название статьи">
+            <textarea class="main-content form-control p-3 mt-3" id="article_text" placeholder="Текст статьи"></textarea>
+            <button class="btn btn-primary form-control mt-3 mb-5 create_article">Создать статью</button>
+        </div>
+    </div>
+</body>
+</html>
