@@ -100,5 +100,12 @@ router.post("/reg", (req, res) => {
             res.cookie("token", token)
     }
 })
+router.post("/create_article", (req, res) => {
+    let title = req.body.title
+    let text = req.body.text
+    let login = req.body.user
+    sql.query("INSERT INTO articles (title, article_text, user) VALUES (?, ?, ?)", [title, text, login])
+    res.send("success")
+})
 
 module.exports = router

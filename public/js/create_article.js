@@ -15,7 +15,9 @@ jQuery(document).ready(() => {
                 $(".create_article").prop("disabled", true)
             },
             'success': (data) => {
-                alert(data)
+                if (data == "success") {
+                    // [ Ну типо какой-то полезный код ]
+                }
             },
             'complete': () => {
                 $(".create_article").prop("disabled", false)
