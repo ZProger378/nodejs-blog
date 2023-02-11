@@ -16,14 +16,37 @@ let create_hash = (name) => {
 
 // Обработка GET запросов
 router.get("/", (req, res) => {
-    let token = req.cookies.token
-    if (token) {
-        sql.query("SELECT * FROM sessions WHERE token = ?", [token], (err, result) => {
-            res.render("index", {is_auth: true, username: result[0].user_id})
+    sql.query("SELECT * FROM articles", (err, ress) => {
+        let articles = ress.reverse()
+        let token = req.cookies.token
+        if (token) {
+            sql.query("SELECT * FROM sessions WHERE token = ?", [token], (err, result) => {
+                res.render("index", {is_auth: true, username: result[0].user_id, articles: articles})
+            })
+        } else {
+            res.render("index", {is_auth: false, username: undefined, articles: articles})
+        }
+    })
+})
+router.get("/article/id-:article_id", (req, res) => {
+    sql.query("SELECT * FROM articles", (err, resls) => {
+        let articles = resls.reverse()
+        let article_id = req.params.article_id
+        sql.query("SELECT * FROM articles WHERE id = ?", [article_id], (err, result) => {
+            if (result[0]) {
+                let token = req.cookies.token
+                if (token) {
+                    sql.query("SELECT * FROM sessions WHERE token = ?", [token], (err, ress) => {
+                        res.render("article_page", {is_auth: true, username: ress[0].user_id, article_content: result[0], articles: articles})
+                    })
+                } else {
+                    res.render("article_page", {is_auth: false, username: undefined, article_content: result, articles: articles})
+                }
+            } else {
+                res.send("Извините, статья не найдена!")
+            }
         })
-    } else {
-        res.render("index", {is_auth: false, username: undefined})
-    }
+    })
 })
 router.get("/login", (req, res) => {
     let token = req.cookies.token

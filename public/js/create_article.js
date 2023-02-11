@@ -16,7 +16,7 @@ jQuery(document).ready(() => {
             },
             'success': (data) => {
                 if (data == "success") {
-                    // [ Ну типо какой-то полезный код ]
+                    window.location = "/"
                 }
             },
             'complete': () => {

@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title><%- article_content.title %></title>
 </head>
 <body>
     <%- include("blocks/header"); %>
-    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="/styles/article_page.css">
     <div class="blocks">
+        <div class="block main-block mt-5">
+            <h1><%- article_content.title %></h1>
+            <div class="main-content p-3">
+                <% article_content.article_text.split("\n").forEach(paragraph => { %>
+                    <p><%- paragraph %></p>
+                <% }); %> 
+            </div>
+        </div>
         <div class="block topics-block mt-5 p-3">
             <div class="topics-ul">
                 <h3>Новые статьи</h3>
