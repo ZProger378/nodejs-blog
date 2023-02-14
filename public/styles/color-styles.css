@@ -2,14 +2,25 @@
     color: #fefefe;
 } body {
     background-color: #121212;
-} input {
+} input, textarea {
     background-color: #1c1c1c !important;
     border-color: #121212 !important;
+    color: #fefefe !important;
+} .btn {
+    background-color: #3000c9 !important;
+    border-color: #3000c9 !important;
+    box-shadow: 0 0 5px #3000c9;
+} .btn:hover {
+    box-shadow: none;
 } a:hover {
     color: #fefefe;
 } .dark-block {
     background-color: #1c1c1c;
     border-radius: 5px !important;
+} .dropdown-item {
+    color: #fefefe !important;
+} .dropdown-item:hover {
+    background-color: #121212 !important;
 } span > a {
     font-size: 20px;
     color: #fefefe;
