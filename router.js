@@ -34,13 +34,14 @@ router.get("/article/id-:article_id", (req, res) => {
         let article_id = req.params.article_id
         sql.query("SELECT * FROM articles WHERE id = ?", [article_id], (err, result) => {
             if (result[0]) {
+                sql.query("UPDATE articles SET views = views + 1 WHERE id = ?", [article_id])
                 let token = req.cookies.token
                 if (token) {
                     sql.query("SELECT * FROM sessions WHERE token = ?", [token], (err, ress) => {
                         res.render("article_page", {is_auth: true, username: ress[0].user_id, article_content: result[0], articles: articles})
                     })
                 } else {
-                    res.render("article_page", {is_auth: false, username: undefined, article_content: result, articles: articles})
+                    res.render("article_page", {is_auth: false, username: undefined, article_content: result[0], articles: articles})
                 }
             } else {
                 res.send("Извините, статья не найдена!")
@@ -99,7 +100,7 @@ router.post("/login", (req, res) => {
                 token += chrs.substring(pos,pos+1)
             }
             sql.query("INSERT INTO sessions (user_id, token) VALUES (?, ?)", [result[0].login, token])
-            res.cookie("token", token)
+            res.cookie("token", token, {maxAge: 30 * 24 * 60 * 60})
             res.send("success")
         } else
             res.send("invalid credit data")
@@ -120,7 +121,7 @@ router.post("/reg", (req, res) => {
                 token += chrs.substring(pos,pos+1)
             }
             sql.query("INSERT INTO sessions (user_id, token) VALUES (?, ?)", [login, token])
-            res.cookie("token", token)
+            res.cookie("token", token, {maxAge: 30 * 24 * 60 * 60})
     }
 })
 router.post("/create_article", (req, res) => {
