@@ -7,15 +7,12 @@
     margin-left: 50px;
     width: 100%;
 } .topics-block {
+    margin-left: auto;
     width: 100%;
 } .main-content {
-    border: black solid 1px;
     border-radius: 5px;
 } .topics-ul {
     margin-left: auto;
-} .topic-link > a{
-    font-size: 20px;
-    color: black !important;
 } .topic-link {
     display: grid;
     grid-template-columns: 1fr 1fr;

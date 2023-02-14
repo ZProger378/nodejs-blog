@@ -92,7 +92,7 @@ router.post("/login", (req, res) => {
     let pass_hash = create_hash(pass)
     sql.query("SELECT * FROM users WHERE login = ? AND password = ?", [login, pass_hash], (err, result) => {
         if (result[0] != undefined) {
-            let chrs = 'abdehkmnpswxzABDEFGHKMNPQRSTWXZ123456789'
+            let chrs = 'abdehkmnpswxzABDEFGHKMNPQRSTWXZ1234567890'
             let len = 16
             let token = ''
             for (let i = 0; i < len; i++) {
@@ -113,7 +113,7 @@ router.post("/reg", (req, res) => {
     let pass_hash = create_hash(pass)
     sql.query("INSERT INTO users (login, password) VALUES (?, ?)", [login, pass_hash])
     if (auto_auth) {
-        let chrs = 'abdehkmnpswxzABDEFGHKMNPQRSTWXZ123456789'
+        let chrs = 'abdehkmnpswxzABDEFGHKMNPQRSTWXZ1234567890'
             let len = 16
             let token = ''
             for (let i = 0; i < len; i++) {

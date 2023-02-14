@@ -1,0 +1,20 @@
+* {
+    color: #fefefe;
+} body {
+    background-color: #121212;
+} input {
+    background-color: #1c1c1c !important;
+    border-color: #121212 !important;
+} a:hover {
+    color: #fefefe;
+} .dark-block {
+    background-color: #1c1c1c;
+    border-radius: 5px !important;
+} span > a {
+    font-size: 20px;
+    color: #fefefe;
+    text-decoration: none;
+} .topic_link > span:hover {
+    color: #fefefe !important;
+    text-decoration: #fefefe !important;
+}
