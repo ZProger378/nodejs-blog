@@ -25,7 +25,9 @@
     font-size: 20px;
     color: #fefefe;
     text-decoration: none;
-} .topic_link > span:hover {
+} .topic-link > span:hover {
     color: #fefefe !important;
     text-decoration: #fefefe !important;
+} .topic-link:hover {
+    background-color: #292929 !important;
 }
