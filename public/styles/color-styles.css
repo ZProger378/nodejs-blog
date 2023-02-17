@@ -30,4 +30,5 @@
     text-decoration: #fefefe !important;
 } .topic-link:hover {
     background-color: #292929 !important;
+    border-radius: 7px;
 }

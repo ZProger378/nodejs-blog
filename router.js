@@ -73,6 +73,20 @@ router.get("/logout", (req, res) => {
     res.clearCookie("token")
     res.redirect("/")
 })
+router.get("/my_articles", (req, res) => {
+    let token = req.cookies.token
+    if (token) {
+        sql.query("SELECT * FROM sessions WHERE token = ?", [token], (err, result) => {
+            let username = result[0].user_id
+            sql.query("SELECT * FROM articles", (err, ress) => {
+                let articles = ress
+                res.render("my_articles", {is_auth: true, username: username, articles: articles})
+            })
+        })
+    } else {
+        res.redirect("/login")
+    }
+})
 router.get("/create_article", (req, res) => {
     let token = req.cookies.token
     if (token) {
@@ -80,7 +94,7 @@ router.get("/create_article", (req, res) => {
             res.render("create_article", {is_auth: true, username: result[0].user_id})
         })
     } else {
-        res.render("create_article", {is_auth: false, username: undefined})
+        res.redirect("/login")
     }
 })
 
