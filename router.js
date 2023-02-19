@@ -78,7 +78,7 @@ router.get("/my_articles", (req, res) => {
     if (token) {
         sql.query("SELECT * FROM sessions WHERE token = ?", [token], (err, result) => {
             let username = result[0].user_id
-            sql.query("SELECT * FROM articles", (err, ress) => {
+            sql.query("SELECT * FROM articles WHERE user = ?", [username], (err, ress) => {
                 let articles = ress
                 res.render("my_articles", {is_auth: true, username: username, articles: articles})
             })
@@ -137,6 +137,7 @@ router.post("/reg", (req, res) => {
             sql.query("INSERT INTO sessions (user_id, token) VALUES (?, ?)", [login, token])
             res.cookie("token", token, {maxAge: 30 * 24 * 60 * 60})
     }
+    res.send("success")
 })
 router.post("/create_article", (req, res) => {
     let title = req.body.title

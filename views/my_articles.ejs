@@ -14,26 +14,30 @@
             <div class="topics-ul">
                 <h3>Статьи <b><%- username %></b></h3>
                 <ul class="main-ul" style="list-style-type: none; padding-left: 0;">
-                    <% articles.forEach(article => { %>
-                        <%
-                            let year = article.date.getFullYear()
-                            let month = article.date.getMonth()
-                            let day = article.date.getDate()
-                            let hours = article.date.getHours()
-                            let minutes = article.date.getMinutes()
-                            if (month < 10) {
-                                month = "0" + month.toString()
-                            } if (day < 10) {
-                                day = "0" + day.toString()
-                            } if (hours < 10) {
-                                hours = "0" + hours.toString()
-                            } if (minutes < 10) {
-                                minutes = "0" + minutes.toString()
-                            }
-                            let date = `${day}.${month}.${year} ${hours}:${minutes}`
-                        %> 
-                        <li class="topic-link p-3"><span><a href="/article/id-<%-article.id%> "><%-article.title%></a> (<a href="/<%- article.user %>"><%- article.user %></a>)</span> <span><%-date%> | <%-article.views%> <img width="20" height="20" src="/icons/views-icon.png" alt="Просмотров"></span></li>
-                    <% }); %> 
+                    <% if (!articles.length) { %>
+                        <li class="p-3">У вас нет собственных статей!</li>
+                    <% } else { %>
+                        <% articles.forEach(article => { %>
+                            <%
+                                let year = article.date.getFullYear()
+                                let month = article.date.getMonth()
+                                let day = article.date.getDate()
+                                let hours = article.date.getHours()
+                                let minutes = article.date.getMinutes()
+                                if (month < 10) {
+                                    month = "0" + month.toString()
+                                } if (day < 10) {
+                                    day = "0" + day.toString()
+                                } if (hours < 10) {
+                                    hours = "0" + hours.toString()
+                                } if (minutes < 10) {
+                                    minutes = "0" + minutes.toString()
+                                }
+                                let date = `${day}.${month}.${year} ${hours}:${minutes}`
+                            %> 
+                            <li class="topic-link p-3"><span><a href="/article/id-<%-article.id%> "><%-article.title%></a> (<a href="/<%- article.user %>"><%- article.user %></a>)</span> <span><%-date%> | <%-article.views%> <img width="20" height="20" src="/icons/views-icon.png" alt="Просмотров"></span></li>
+                        <% }); %> 
+                    <% } %>
                 </ul>
             </div>
         </div>
