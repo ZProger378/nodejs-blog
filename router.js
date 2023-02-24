@@ -32,20 +32,24 @@ router.get("/article/id-:article_id", (req, res) => {
     sql.query("SELECT * FROM articles", (err, resls) => {
         let articles = resls.reverse()
         let article_id = req.params.article_id
-        sql.query("SELECT * FROM articles WHERE id = ?", [article_id], (err, result) => {
-            if (result[0]) {
-                sql.query("UPDATE articles SET views = views + 1 WHERE id = ?", [article_id])
-                let token = req.cookies.token
-                if (token) {
-                    sql.query("SELECT * FROM sessions WHERE token = ?", [token], (err, ress) => {
+        let token = req.cookies.token
+        sql.query("SELECT * FROM sessions WHERE token = ?", [token], (err, ress) => {
+            sql.query("UPDATE articles SET views = views + 1 WHERE id = ?", [article_id])
+            sql.query("SELECT * FROM articles WHERE id = ?", [article_id], (err, result) => {
+                if (ress[0]) {
+                    if (result[0]) {
                         res.render("article_page", {is_auth: true, username: ress[0].user_id, article_content: result[0], articles: articles})
-                    })
+                    } else {
+                        res.render("article_not_found", {is_auth: true, username: ress[0].user_id})
+                    }
                 } else {
-                    res.render("article_page", {is_auth: false, username: undefined, article_content: result[0], articles: articles})
+                    if (result[0]) {
+                        res.render("article_page", {is_auth: false, username: undefined, article_content: result[0], articles: articles})
+                    } else {
+                        res.render("article_not_found", {is_auth: false, username: undefined})
+                    }
                 }
-            } else {
-                res.send("Извините, статья не найдена!")
-            }
+            })
         })
     })
 })
