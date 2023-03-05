@@ -33,7 +33,10 @@ jQuery(document).ready(() => {
                     $(".reg-btn").prop("disabled", true)
                 },
                 'success': (data) => {
-                    window.location = "/"
+                    if (data == "success")
+                        window.location = "/"
+                    else
+                        $(".invalid-data").show()
                 },
                 'complete': () => {
                     $(".reg-btn").prop("disabled", false)

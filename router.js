@@ -7,6 +7,7 @@ const crypto = require('crypto')
 const sql = require("./db_config")
 const router = express.Router()  // Создание экземпляра роутера
 
+// Функция для создания хэша из пароля
 let create_hash = (name) => {
     let hash = crypto.createHash('md5').update(name).digest('hex')
     return hash
@@ -129,19 +130,25 @@ router.post("/reg", (req, res) => {
     let pass = req.body.pass
     let auto_auth = req.body.auto_auth
     let pass_hash = create_hash(pass)
-    sql.query("INSERT INTO users (login, password) VALUES (?, ?)", [login, pass_hash])
-    if (auto_auth) {
-        let chrs = 'abdehkmnpswxzABDEFGHKMNPQRSTWXZ1234567890'
-            let len = 16
-            let token = ''
-            for (let i = 0; i < len; i++) {
-                let pos = Math.floor(Math.random() * chrs.length)
-                token += chrs.substring(pos,pos+1)
+    sql.query("SELECT * FROM users WHERE login = ?", [login], (err, result) => {
+        if (result[0] == undefined) {
+            sql.query("INSERT INTO users (login, password) VALUES (?, ?)", [login, pass_hash])
+            if (auto_auth) {
+                let chrs = 'abdehkmnpswxzABDEFGHKMNPQRSTWXZ1234567890'
+                    let len = 16
+                    let token = ''
+                    for (let i = 0; i < len; i++) {
+                        let pos = Math.floor(Math.random() * chrs.length)
+                        token += chrs.substring(pos,pos+1)
+                    }
+                    sql.query("INSERT INTO sessions (user_id, token) VALUES (?, ?)", [login, token])
+                    res.cookie("token", token, {maxAge: 30 * 24 * 60 * 60})
             }
-            sql.query("INSERT INTO sessions (user_id, token) VALUES (?, ?)", [login, token])
-            res.cookie("token", token, {maxAge: 30 * 24 * 60 * 60})
-    }
-    res.send("success")
+            res.send("success")
+        } else {
+            res.send("exist")
+        }
+    })
 })
 router.post("/create_article", (req, res) => {
     let title = req.body.title
